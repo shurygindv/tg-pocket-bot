@@ -1,0 +1,23 @@
+{
+  "name": "tg-pocket-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/shurygindv/tg-pocket-bot.git",
+  "author": "shurygindv <shurygindv1@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "ts-node -r tsconfig-paths/register src/main.ts"
+  },
+  "dependencies": {
+    "ramda": "^0.26.1",
+    "telegraf": "^3.27.1"
+  },
+  "devDependencies": {
+    "@types/node": "^11.11.6",
+    "@types/ramda": "^0.26.4",
+    "ts-node": "^8.0.3",
+    "tsconfig-paths": "^3.8.0",
+    "typescript": "^3.3.4000"
+  }
+}
