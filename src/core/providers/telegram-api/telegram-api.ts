@@ -1,13 +1,23 @@
+import * as R from 'ramda';
 import Telegraf, {
     ContextMessageUpdate,
     Middleware,
+    Extra,
     Composer,
     HearsTriggers,
+    Markup,
+    CallbackButton,
 } from 'telegraf';
 import {injectable} from 'inversify';
 
 import {ENV} from '../../../config/env';
-import {CtxMessageUpdate, MessageSubTypes} from './telegram-api.interface';
+import {
+    CtxMessageUpdate,
+    MessageSubTypes,
+    InlineKeyboardPair,
+} from './telegram-api.interface';
+import {randomId} from '../../../utils';
+import {InlineKeyboardMarkup} from 'telegram-typings';
 
 @injectable()
 export class TelegramApi implements TelegramApi {
@@ -56,5 +66,36 @@ export class TelegramApi implements TelegramApi {
         middleware: Middleware<CtxMessageUpdate>,
     ): Composer<CtxMessageUpdate> {
         return this.core.command(cmd, middleware);
+    }
+
+    public action(
+        key: string,
+        middleware: Middleware<CtxMessageUpdate>,
+    ): Composer<CtxMessageUpdate> {
+        // TODO: replace any https://github.com/telegraf/telegraf/issues/71
+        return (this.telegraf as any).action(key, middleware);
+    }
+
+    public showInlineKeyboard(pairs: InlineKeyboardPair[]): any {
+        // TODO: refactor + https://github.com/telegraf/telegraf/issues/71
+
+        return Extra.markup(
+            (m: Markup): InlineKeyboardMarkup => {
+                return m.inlineKeyboard(
+                    pairs.map(
+                        ([
+                            name,
+                            action,
+                        ]: InlineKeyboardPair): CallbackButton => {
+                            const id = randomId();
+
+                            this.action(id, action);
+                            return m.callbackButton(name, id, false);
+                        },
+                    ),
+                    {},
+                );
+            },
+        );
     }
 }

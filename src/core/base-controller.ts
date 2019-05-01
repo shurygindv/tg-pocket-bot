@@ -5,9 +5,9 @@ import {TelegramApi} from './providers/telegram-api/telegram-api.interface';
 
 @injectable()
 export class BaseController {
-    protected telegramApi: TelegramApi;
+    protected telegram: TelegramApi;
 
-    public constructor(@inject(Tokens.TelegramApi) telegramApi: TelegramApi) {
-        this.telegramApi = telegramApi;
+    public constructor(@inject(Tokens.Telegram) telegramApi: TelegramApi) {
+        this.telegram = telegramApi;
     }
 }

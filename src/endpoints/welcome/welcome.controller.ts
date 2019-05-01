@@ -9,10 +9,8 @@ import {
 
 @injectable()
 export class WelcomeController extends BaseController implements Controller {
-    // eslint-disable-next-line @typescript-eslint/explicit-member-accessibility
-
     private bePolite(): void {
-        this.telegramApi.start(
+        this.telegram.start(
             (ctx: CtxMessageUpdate): Promise<Message> => {
                 return ctx.reply('Welcome! You are so cool, stay here :)');
             },
@@ -21,5 +19,15 @@ export class WelcomeController extends BaseController implements Controller {
 
     public onInit(): void {
         this.bePolite();
+
+        this.telegram.command('edit', ctx =>
+            ctx.reply(
+                'Special buttons keyboard',
+                // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+                this.telegram.showInlineKeyboard([
+                    ['Change media', (ctx): any => ctx.reply('sss')],
+                ]),
+            ),
+        );
     }
 }

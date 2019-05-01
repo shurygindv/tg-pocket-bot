@@ -48,7 +48,7 @@ moduleContainer
 
 // core
 moduleContainer
-    .bind(Tokens.TelegramApi)
+    .bind(Tokens.Telegram)
     .to(TelegramApi)
     .inSingletonScope();
 

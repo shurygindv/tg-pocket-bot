@@ -8,7 +8,7 @@ export interface Service {}
 export const Tokens = {
     Application: Symbol.for('Application'),
 
-    TelegramApi: Symbol.for('TelegramService'),
+    Telegram: Symbol.for('TelegramService'),
     DatabaseService: Symbol.for('DatabaseService'),
 
     NoteController: Symbol.for('NoteController'),

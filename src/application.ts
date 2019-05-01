@@ -12,7 +12,7 @@ export class Application {
     private sectionController: Controller;
 
     public constructor(
-        @inject(Tokens.TelegramApi) telegramApi: TelegramApi,
+        @inject(Tokens.Telegram) telegramApi: TelegramApi,
 
         @inject(Tokens.NoteController) noteController: Controller,
         @inject(Tokens.WelcomeController) welcomeController: Controller,

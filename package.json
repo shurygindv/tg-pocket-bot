@@ -12,11 +12,13 @@
   },
   "dependencies": {
     "inversify": "^5.0.1",
+    "nanoid": "^2.0.1",
     "ramda": "^0.26.1",
     "reflect-metadata": "^0.1.13",
-    "telegraf": "^3.27.1"
+    "telegraf": "^3.29.0"
   },
   "devDependencies": {
+    "@types/nanoid": "^1.2.1",
     "@types/node": "^11.11.6",
     "@types/ramda": "^0.26.4",
     "@typescript-eslint/eslint-plugin": "^1.7.0",

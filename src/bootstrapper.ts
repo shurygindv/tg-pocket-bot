@@ -11,5 +11,5 @@ const application: Application = moduleContainer.get<Application>(
 (async (): Promise<void> => {
     await application.bootstrap();
 
-    console.log(`Here we go`);
+    console.log(`Let's go`);
 })();

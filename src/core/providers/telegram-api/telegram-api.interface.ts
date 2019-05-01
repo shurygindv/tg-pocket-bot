@@ -3,9 +3,13 @@ import {
     Middleware,
     Composer,
     HearsTriggers,
+    Extra,
 } from 'telegraf';
 import {Message as TelegramMessage} from 'telegram-typings';
-import {MessageSubTypes as TelegragMsgSubTypes} from 'telegraf/typings/telegram-types';
+import {
+    MessageSubTypes as TelegragMsgSubTypes,
+    ExtraReplyMessage,
+} from 'telegraf/typings/telegram-types';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Message extends TelegramMessage {}
@@ -13,6 +17,11 @@ export interface Message extends TelegramMessage {}
 export interface CtxMessageUpdate extends ContextMessageUpdate {}
 
 export type MessageSubTypes = TelegragMsgSubTypes;
+
+export type InlineKeyboardPair = [
+    string,
+    (ctx: CtxMessageUpdate) => Composer<CtxMessageUpdate>
+];
 
 export interface TelegramApi {
     launch(): Promise<void>;
@@ -34,4 +43,13 @@ export interface TelegramApi {
         cmd: string,
         middleware: Middleware<CtxMessageUpdate>,
     ): Composer<CtxMessageUpdate>;
+
+    action(
+        key: string,
+        middleware: Middleware<CtxMessageUpdate>,
+    ): Composer<CtxMessageUpdate>;
+
+    showInlineKeyboard(
+        pairs: InlineKeyboardPair[],
+    ): ExtraReplyMessage | undefined;
 }
