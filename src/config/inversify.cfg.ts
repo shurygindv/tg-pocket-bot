@@ -13,8 +13,8 @@ import {NoteController} from '../endpoints/note/note.controller';
 
 import {Tokens} from '../types';
 import {Application} from '../application';
-import {DatabaseProvider} from '../providers/database/database';
-import {TelegramApi} from '../providers/telegram-api/telegram-api';
+import {DatabaseProvider} from '../core/providers/database/database';
+import {TelegramApi} from '../core/providers/telegram-api/telegram-api';
 
 const moduleContainer: Container = new Container();
 

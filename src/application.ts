@@ -1,7 +1,7 @@
 import {inject, injectable} from 'inversify';
 
 import {Tokens, Controller} from './types';
-import {TelegramApi} from './providers/telegram-api/telegram-api.interface';
+import {TelegramApi} from './core/providers/telegram-api/telegram-api.interface';
 
 @injectable()
 export class Application {
@@ -31,16 +31,17 @@ export class Application {
         this.welcomeController.onInit();
     }
 
-    private launchApi = (): void => {
+    private launch = (): void => {
         this.telegramApi.launch();
     };
 
     public async bootstrap(): Promise<() => void> {
         return new Promise(
-            (resolver: (launcher: any) => void): void => {
+            (resolver: () => void): void => {
                 this.init();
+                this.launch();
 
-                resolver(this.launchApi);
+                resolver();
             },
         );
     }
