@@ -6,29 +6,19 @@ import {TelegramApi} from './core/providers/telegram-api/telegram-api.interface'
 @injectable()
 export class Application {
     private telegramApi: TelegramApi;
-
-    private noteController: Controller;
-    private welcomeController: Controller;
-    private sectionController: Controller;
+    private pocketController: Controller;
 
     public constructor(
         @inject(Tokens.Telegram) telegramApi: TelegramApi,
 
-        @inject(Tokens.NoteController) noteController: Controller,
-        @inject(Tokens.WelcomeController) welcomeController: Controller,
-        @inject(Tokens.SectionController) sectionController: Controller,
+        @inject(Tokens.PocketController) pocketController: Controller,
     ) {
         this.telegramApi = telegramApi;
-
-        this.noteController = noteController;
-        this.sectionController = sectionController;
-        this.welcomeController = welcomeController;
+        this.pocketController = pocketController;
     }
 
     private init(): void {
-        this.noteController.onInit();
-        this.sectionController.onInit();
-        this.welcomeController.onInit();
+        this.pocketController.onInit();
     }
 
     private launch = (): void => {

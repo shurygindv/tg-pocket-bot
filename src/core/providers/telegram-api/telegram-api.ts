@@ -11,13 +11,20 @@ import Telegraf, {
 import {injectable} from 'inversify';
 
 import {ENV} from '../../../config/env';
-import {
-    CtxMessageUpdate,
-    MessageSubTypes,
-    InlineKeyboardPair,
-} from './telegram-api.interface';
 import {randomId} from '../../../utils';
 import {InlineKeyboardMarkup} from 'telegram-typings';
+import {CtxMessageUpdate, MessageSubTypes, InlineKeyboardPair} from './telegram-api.interface';
+/*
+import Stage from 'telegraf/stage';
+
+const Stage = require('telegraf/stage');
+const Scene = require('telegraf/scenes/base');
+const {leave} = Stage;
+
+export const createTelegramBaseScene = (sceneName: string) => {
+    return new BaseScene(sceneName);
+};
+*/
 
 @injectable()
 export class TelegramApi implements TelegramApi {
@@ -42,15 +49,11 @@ export class TelegramApi implements TelegramApi {
         return this.core.hears(triggers, middleware);
     }
 
-    public help(
-        middleware: Middleware<CtxMessageUpdate>,
-    ): Composer<ContextMessageUpdate> {
+    public help(middleware: Middleware<CtxMessageUpdate>): Composer<ContextMessageUpdate> {
         return this.core.help(middleware);
     }
 
-    public start(
-        middleware: Middleware<CtxMessageUpdate>,
-    ): Composer<CtxMessageUpdate> {
+    public start(middleware: Middleware<CtxMessageUpdate>): Composer<CtxMessageUpdate> {
         return this.core.start(middleware);
     }
 
@@ -76,17 +79,14 @@ export class TelegramApi implements TelegramApi {
         return (this.telegraf as any).action(key, middleware);
     }
 
-    public showInlineKeyboard(pairs: InlineKeyboardPair[]): any {
+    public configureInlineKeyboard(pairs: InlineKeyboardPair[]): any {
         // TODO: refactor + https://github.com/telegraf/telegraf/issues/71
 
         return Extra.markup(
             (m: Markup): InlineKeyboardMarkup => {
                 return m.inlineKeyboard(
                     pairs.map(
-                        ([
-                            name,
-                            action,
-                        ]: InlineKeyboardPair): CallbackButton => {
+                        ([name, action]: InlineKeyboardPair): CallbackButton => {
                             const id = randomId();
 
                             this.action(id, action);

@@ -1,20 +1,17 @@
 import {Container} from 'inversify';
 
 // welcome
-import {WelcomeController} from '../endpoints/welcome/welcome.controller';
+import {WelcomeController} from '../endpoints/pocket/welcome/welcome.controller';
 
 // sections
-import {SectionController} from '../endpoints/section/section.controller';
-import {SectionService} from '../endpoints/section/section.service';
-
-// notes
-import {NoteService} from '../endpoints/note/note.service';
-import {NoteController} from '../endpoints/note/note.controller';
+import {TopicController} from '../endpoints/pocket/topic/topic.controller';
+import {TopicService} from '../endpoints/pocket/topic/topic.service';
 
 import {Tokens} from '../types';
 import {Application} from '../application';
 import {DatabaseProvider} from '../core/providers/database/database';
 import {TelegramApi} from '../core/providers/telegram-api/telegram-api';
+import {PocketController} from '../endpoints/pocket/pocket.controller';
 
 const moduleContainer: Container = new Container();
 
@@ -26,24 +23,19 @@ moduleContainer
 
 // section
 moduleContainer
-    .bind(Tokens.SectionController)
-    .to(SectionController)
+    .bind(Tokens.TopicController)
+    .to(TopicController)
     .inSingletonScope();
 
 moduleContainer
-    .bind(Tokens.SectionService)
-    .to(SectionService)
+    .bind(Tokens.TopicService)
+    .to(TopicService)
     .inSingletonScope();
 
-// note
+// endpoints
 moduleContainer
-    .bind(Tokens.NoteController)
-    .to(NoteController)
-    .inSingletonScope();
-
-moduleContainer
-    .bind(Tokens.NoteService)
-    .to(NoteService)
+    .bind(Tokens.PocketController)
+    .to(PocketController)
     .inSingletonScope();
 
 // core

@@ -1,10 +1,4 @@
-import {
-    ContextMessageUpdate,
-    Middleware,
-    Composer,
-    HearsTriggers,
-    Extra,
-} from 'telegraf';
+import {ContextMessageUpdate, Middleware, Composer, HearsTriggers, Extra} from 'telegraf';
 import {Message as TelegramMessage} from 'telegram-typings';
 import {
     MessageSubTypes as TelegragMsgSubTypes,
@@ -18,19 +12,13 @@ export interface CtxMessageUpdate extends ContextMessageUpdate {}
 
 export type MessageSubTypes = TelegragMsgSubTypes;
 
-export type InlineKeyboardPair = [
-    string,
-    (ctx: CtxMessageUpdate) => Composer<CtxMessageUpdate>
-];
+export type InlineKeyboardPair = [string, (ctx: CtxMessageUpdate) => Composer<CtxMessageUpdate>];
 
 export interface TelegramApi {
     launch(): Promise<void>;
 
     start(middleware: Middleware<CtxMessageUpdate>): Composer<CtxMessageUpdate>;
-    on(
-        key: MessageSubTypes,
-        middleware: Middleware<CtxMessageUpdate>,
-    ): Composer<CtxMessageUpdate>;
+    on(key: MessageSubTypes, middleware: Middleware<CtxMessageUpdate>): Composer<CtxMessageUpdate>;
 
     help(middleware: Middleware<CtxMessageUpdate>): Composer<CtxMessageUpdate>;
 
@@ -39,17 +27,9 @@ export interface TelegramApi {
         middleware: Middleware<CtxMessageUpdate>,
     ): Composer<CtxMessageUpdate>;
 
-    command(
-        cmd: string,
-        middleware: Middleware<CtxMessageUpdate>,
-    ): Composer<CtxMessageUpdate>;
+    command(cmd: string, middleware: Middleware<CtxMessageUpdate>): Composer<CtxMessageUpdate>;
 
-    action(
-        key: string,
-        middleware: Middleware<CtxMessageUpdate>,
-    ): Composer<CtxMessageUpdate>;
+    action(key: string, middleware: Middleware<CtxMessageUpdate>): Composer<CtxMessageUpdate>;
 
-    showInlineKeyboard(
-        pairs: InlineKeyboardPair[],
-    ): ExtraReplyMessage | undefined;
+    configureInlineKeyboard(pairs: InlineKeyboardPair[]): ExtraReplyMessage | undefined;
 }

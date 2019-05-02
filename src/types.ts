@@ -11,11 +11,9 @@ export const Tokens = {
     Telegram: Symbol.for('TelegramService'),
     DatabaseService: Symbol.for('DatabaseService'),
 
-    NoteController: Symbol.for('NoteController'),
-    NoteService: Symbol.for('NoteService'),
-
-    SectionController: Symbol.for('SectionController'),
-    SectionService: Symbol.for('SectionService'),
-
-    WelcomeController: Symbol.for('WelcomeController'),
+    // pocket
+    PocketController: Symbol.for('PocketController'),
+    WelcomeController: Symbol.for('P_WelcomeController'),
+    TopicController: Symbol.for('P_TopicController'),
+    TopicService: Symbol.for('P_TopicService'),
 };

@@ -10,6 +10,8 @@
         "plugin:prettier/recommended"
     ],
     "rules": {
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "implicit-arrow-linebreak": "off",
+        "max-len": ["error", { "code": 100 }]
     }
 }
